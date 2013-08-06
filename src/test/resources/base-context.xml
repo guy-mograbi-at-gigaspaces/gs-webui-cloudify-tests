@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <import resource="classpath:webui-test-beans-context.xml"/>
+
+
+    <bean id="rootUrl" class="java.lang.String">
+        <constructor-arg value="#{driverFactory.rootUrl}"/>
+    </bean>
+
+    <!--<bean id="licenseTestConf" class="webui.webui.tests.LicenseTest$LicenseTestConf">-->
+    <!--<property name="aboutText" value="cloudify"/>-->
+    <!--<property name="username" value="guy"/>-->
+    <!--<property name="password" value="guy"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="recipesRepositoryTestConf" class="webui.webui.tests.RecipesRepositoryTest$RecipesRepositoryTestConf">-->
+    <!--<property name="progressConsoleText" value="Starting Non-Interactive Shell" />-->
+    <!--<property name="progressDialogText" value="Installation started" />-->
+    <!--</bean>-->
+    <!---->
+    <context:component-scan base-package="tests"/>
+    <context:component-scan base-package="webui.cloudify"/>
+    <context:component-scan base-package="webui.tests"/>
+    <context:component-scan base-package="org.cloudifysource.setup.manager"/>
+    <context:annotation-config/>
+    
+    <beans profile="mock,default">
+        <import resource="mock-context.xml"/>
+    </beans>
+    
+    <beans profile="impl">
+        <import resource="impl-context.xml"/>
+    </beans>
+</beans>
