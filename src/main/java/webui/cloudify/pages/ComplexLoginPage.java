@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import webui.cloudify.components.LoginForm;
-import webui.tests.annotations.FirstDisplayed;
 import webui.tests.annotations.LazyLoad;
 import webui.tests.components.abstracts.AbstractComponent;
 
