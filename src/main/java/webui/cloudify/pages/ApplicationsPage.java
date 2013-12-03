@@ -9,10 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import webui.cloudify.components.ApplicationMap;
-import webui.tests.annotations.FirstDisplayed;
-import webui.tests.annotations.OnLoad;
+import webui.cloudify.components.PopupDialog;
+import webui.tests.annotations.Absolute;
+import webui.tests.annotations.LazyLoad;
 import webui.tests.components.abstracts.AbstractComponent;
-import webui.tests.components.abstracts.GsPage;
 import webui.tests.components.gwt.ApplicationsInnerTabs;
 import webui.tests.components.gwt.ComboBox;
 
@@ -25,30 +25,31 @@ import java.util.List;
  * Time: 12:57 PM
  */
 @Component
-public class ApplicationsPage extends GsPage<ApplicationsPage> {
+public class ApplicationsPage extends AbstractComponent<ApplicationsPage> {
 
     private static Logger logger = LoggerFactory.getLogger(ApplicationsPage.class);
 
-    @OnLoad
     @FindBy(id = "gs-graph-application-map")
     private ApplicationMap applicationMap;
 
     @FindBy(className = "gs-inner-tabs-container")
     private ApplicationsInnerTabs innerTabs;
 
-    @OnLoad
     @FindBy(id = "gs-button-uninstall-app")
     private WebElement uninstallApplicationButton;
 
-    @OnLoad
     @FindBy(id = "gs-application-combo-TOPOLOGY")
     private ComboBox comboBox;
 
-    // using FirstDisplayed as failsafe: if element is not matched,
-    // the field will be populated with null value
-    @FirstDisplayed
+    @LazyLoad
     @FindBy(css = "#gs-tab-item-topology-progress")
     private ProgressTab progressTab;
+
+    @Absolute
+    @LazyLoad
+    @FindBy(css = "div.x-window-plain.x-window-dlg")
+    private PopupDialog dialog;
+
 
     public ApplicationsPage progressTab() {
         innerTabs.to(ApplicationsInnerTabs.PROGRESS);
@@ -157,6 +158,16 @@ public class ApplicationsPage extends GsPage<ApplicationsPage> {
                 return !applicationMap.has(name);
             }
         });
+        return this;
+    }
+
+    public ApplicationsPage approveUninstall(){
+        dialog.load().clickYes();
+        return this;
+    }
+
+    public ApplicationsPage cancelUninstall(){
+        dialog.load().clickNo();
         return this;
     }
 

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import webui.cloudify.components.LoginForm;
-import webui.tests.annotations.OnLoad;
 import webui.tests.annotations.FirstDisplayed;
-import webui.tests.components.abstracts.GsPage;
+import webui.tests.annotations.LazyLoad;
+import webui.tests.components.abstracts.AbstractComponent;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
  *
  */
 @Component
-public class ComplexLoginPage extends GsPage<ComplexLoginPage> {
+public class ComplexLoginPage extends AbstractComponent<ComplexLoginPage> {
 
     @Autowired
     private DashboardPage dashboardPage;
@@ -33,11 +33,10 @@ public class ComplexLoginPage extends GsPage<ComplexLoginPage> {
 
     private static Logger logger = LoggerFactory.getLogger( ComplexLoginPage.class );
 
-    @FirstDisplayed
+    @LazyLoad
     @FindBy(css="div.form-area, div.gs-login-panel")
     private LoginForm loginForm;
 
-    @OnLoad
     @FindBy(css = "body")
     private WebElement body;
 

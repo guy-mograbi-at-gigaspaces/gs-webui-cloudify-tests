@@ -5,8 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import webui.tests.annotations.OnLoad;
-import webui.tests.components.abstracts.GsPage;
+import webui.tests.components.abstracts.AbstractComponent;
 
 /**
  * User: guym
@@ -14,14 +13,12 @@ import webui.tests.components.abstracts.GsPage;
  * Time: 8:16 AM
  */
 @Component
-public class DashboardPage extends GsPage<DashboardPage> {
+public class DashboardPage extends AbstractComponent<DashboardPage> {
 
 
-    @OnLoad
     @FindBy(id = "gs-tab-item-recipes-button")
     private WebElement recipesButton;
 
-    @OnLoad
     @FindBy(id = "gs-tab-item-topology-button")
     private WebElement applicationsButton;
 
@@ -42,14 +39,12 @@ public class DashboardPage extends GsPage<DashboardPage> {
     }
 
 
-    @OnLoad
     @FindBy(css="#gs-about-button")
     private WebElement aboutButton;
 
     @Autowired
     private ComplexLoginPage loginPage;
 
-    @OnLoad
     @FindBy(css="#gs-logout-button")
     private WebElement logoutButton;
 
@@ -69,7 +64,7 @@ public class DashboardPage extends GsPage<DashboardPage> {
 
     public ComplexLoginPage logout(){
         logoutButton.click();
-        closeDialog( "yes" );
+//        closeDialog( "yes" ); // TODO fill in the missing functionality
         return loginPage.load();
     }
 

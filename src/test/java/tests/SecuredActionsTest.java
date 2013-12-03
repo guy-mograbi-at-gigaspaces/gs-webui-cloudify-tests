@@ -1,8 +1,7 @@
-package tests.repository;
+package tests;
 
 import org.cloudifysource.setup.manager.CloudifyTestBean;
 import org.junit.After;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,7 @@ import webui.cloudify.pages.ApplicationsPage;
 import webui.cloudify.pages.LoginPage;
 import webui.tests.utils.Assert;
 
-import java.lang.String;import java.util.List;
+import java.util.List;
 
 /**
  * User: eliranm
@@ -23,14 +22,14 @@ import java.lang.String;import java.util.List;
  * Time: 12:26 PM
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:tests/ApplicationsUninstallTest-context.xml"})
-public class ApplicationsUninstallTest {
+@ContextConfiguration(locations = {"classpath:tests/SecuredActionsTest-context.xml"})
+public class SecuredActionsTest {
 
 
     @Autowired(required=false)
     private Conf conf = new Conf();
 
-    private static Logger logger = LoggerFactory.getLogger( ApplicationsUninstallTest.class );
+    private static Logger logger = LoggerFactory.getLogger( SecuredActionsTest.class );
 
     @Autowired
     private CloudifyTestBean cloudifyManager;
@@ -90,6 +89,7 @@ public class ApplicationsUninstallTest {
         applicationsPage.selectApplication(conf.serviceApplicationName)
                 .uninstallService(conf.serviceName)
                 .approveUninstall()
+//                .closeDialog("yes")
                 .waitForServiceUninstall(conf.serviceName);
 
 
@@ -105,7 +105,7 @@ public class ApplicationsUninstallTest {
 
     }
 
-    public static class Conf{
+    public static class Conf {
         public String applicationName = "helloworld";
         public String serviceName = "tomcat";
         public String serviceApplicationName = "default";  // the application name for 'serviceName'

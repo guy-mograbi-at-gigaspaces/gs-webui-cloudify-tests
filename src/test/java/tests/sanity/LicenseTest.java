@@ -17,16 +17,14 @@ import webui.cloudify.pages.LoginPage;
  * Date: 3/6/13
  * Time: 11:08 PM
  */
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:example-context.xml"})
+@ContextConfiguration(locations = {"classpath:tests/LicenseTest-context.xml"})
 public class LicenseTest {
 
-    private static Logger logger = LoggerFactory.getLogger( LicenseTest.class );
+    private static Logger logger = LoggerFactory.getLogger(LicenseTest.class);
 
     @Autowired
     private LoginPage loginPage;
-
 
     @Autowired
     private ComplexLoginPage complexLoginPage;
@@ -38,60 +36,60 @@ public class LicenseTest {
     private LicenseTestConf licenseTestConf;
 
     @Before
-    public void before(){
-        logger.info( "bootstrapping" );
+    public void before() {
+        logger.info("bootstrapping");
         cloudifyManager.bootstrap();
     }
 
     @After
-    public void after(){
-        logger.info( "tearing down" );
+    public void after() {
+        logger.info("tearing down");
         cloudifyManager.teardown();
     }
 
     @Ignore
-    public void complexLicenseTest(){
-        logger.info( "license test" );
-        DashboardPage dashboard = complexLoginPage.gotoPage().login( licenseTestConf.username, licenseTestConf.password );
+    public void complexLicenseTest() {
+        logger.info("license test");
+        DashboardPage dashboard = complexLoginPage.gotoPage().login(licenseTestConf.username, licenseTestConf.password);
         dashboard.getAboutButton().click();
-        Assert.assertTrue( String.format( "expecting to see %s in popup with text [%s]", licenseTestConf.aboutText, dashboard.findFirstDisplayedWindowDialog().getText() ), dashboard.isTextInPopups(licenseTestConf.aboutText) );
-        dashboard.closeDialog( "OK" ).clickLogout().closeDialog( "yes" );
+        // TODO comment out and fill in the missing functionality
+//        Assert.assertTrue( String.format( "expecting to see %s in popup with text [%s]", licenseTestConf.aboutText, dashboard.findFirstDisplayedWindowDialog().getText() ), dashboard.isTextInPopups(licenseTestConf.aboutText) );
+//        dashboard.closeDialog( "OK" ).clickLogout().closeDialog( "yes" );
         loginPage.load();
-        Assert.assertTrue( "We are now in login page. We should see welcome message", loginPage.isLoginWelcomeMessageVisible() );
+        Assert.assertTrue("We are now in login page. We should see welcome message", loginPage.isLoginWelcomeMessageVisible());
     }
 
     @Ignore
-    public void licenseTest(){
-        logger.info( "license test" );
-        DashboardPage dashboard = loginPage.gotoPage().login( licenseTestConf.username, licenseTestConf.password );
+    public void licenseTest() {
+        logger.info("license test");
+        DashboardPage dashboard = loginPage.gotoPage().login(licenseTestConf.username, licenseTestConf.password);
         dashboard.getAboutButton().click();
-        Assert.assertTrue( String.format( "expecting to see %s in popup with text [%s]", licenseTestConf.aboutText, dashboard.findFirstDisplayedWindowDialog().getText() ), dashboard.isTextInPopups(licenseTestConf.aboutText) );
-        dashboard.closeDialog("OK").clickLogout().closeDialog( "yes" );
-        loginPage.load();
-       Assert.assertTrue( "We are now in login page. We should see welcome message",loginPage.isLoginWelcomeMessageVisible() );
-
-
+        // TODO comment out and fill in the missing functionality
+//        Assert.assertTrue( String.format( "expecting to see %s in popup with text [%s]", licenseTestConf.aboutText, dashboard.findFirstDisplayedWindowDialog().getText() ), dashboard.isTextInPopups(licenseTestConf.aboutText) );
+//        dashboard.closeDialog("OK").clickLogout().closeDialog( "yes" );
+//        loginPage.load(); // not necessary anymore
+        Assert.assertTrue("We are now in login page. We should see welcome message", loginPage.isLoginWelcomeMessageVisible());
     }
 
     @Test
-    public void failedTest(){
-        throw new RuntimeException( "I am failing!" );
+    public void failedTest() {
+        throw new RuntimeException("I am failing!");
     }
 
-    public static class LicenseTestConf{
-            public String username = null;
-            public String password = null;
-            public String aboutText;
+    public static class LicenseTestConf {
+        public String username = null;
+        public String password = null;
+        public String aboutText;
 
-        public void setUsername( String username ) {
+        public void setUsername(String username) {
             this.username = username;
         }
 
-        public void setPassword( String password ) {
+        public void setPassword(String password) {
             this.password = password;
         }
 
-        public void setAboutText( String aboutText ) {
+        public void setAboutText(String aboutText) {
             this.aboutText = aboutText;
         }
     }

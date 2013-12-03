@@ -10,9 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import webui.cloudify.components.RecipesInnerTabs;
-import webui.tests.components.abstracts.AbstractComponent;
 import webui.tests.annotations.FirstDisplayed;
-import webui.tests.components.abstracts.GsPage;
+import webui.tests.components.abstracts.AbstractComponent;
 
 /**
  * User: eliranm
@@ -20,7 +19,7 @@ import webui.tests.components.abstracts.GsPage;
  * Time: 12:57 PM
  */
 @Component
-public class RecipesRepositoryPage extends GsPage<RecipesRepositoryPage> {
+public class RecipesRepositoryPage extends AbstractComponent<RecipesRepositoryPage> {
 
     private static Logger logger = LoggerFactory.getLogger(RecipesRepositoryPage.class);
 
