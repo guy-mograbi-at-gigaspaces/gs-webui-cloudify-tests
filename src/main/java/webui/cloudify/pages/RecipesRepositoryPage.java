@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import webui.cloudify.components.RecipesInnerTabs;
-import webui.tests.annotations.FirstDisplayed;
 import webui.tests.components.abstracts.AbstractComponent;
 
 /**
@@ -26,7 +25,6 @@ public class RecipesRepositoryPage extends AbstractComponent<RecipesRepositoryPa
     @FindBy(xpath = "//*[@id=\"gs-tab-item-recipes\"]/div/div[2]/div[1]/div")
     private RecipesInnerTabs innerTabs;
 
-    @FirstDisplayed
     @FindBy(css = "#gs-recipes-repo-apps,#gs-recipes-repo-services")
     private RepositoryBrowser repositoryBrowser;
 
