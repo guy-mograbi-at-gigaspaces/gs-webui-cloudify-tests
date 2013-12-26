@@ -49,6 +49,13 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>openspaces-s3</id>
+            <url>http://maven-repository.openspaces.org</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
