@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import webui.tests.annotations.FirstDisplayed;
 import webui.tests.components.abstracts.AbstractComponent;
 
 import java.util.List;
@@ -30,15 +31,19 @@ public class LoginPage extends AbstractComponent<ComplexLoginPage> {
 
     private static Logger logger = LoggerFactory.getLogger(ComplexLoginPage.class);
 
+
     @FindBy(css = "body")
     private WebElement body;
 
+    @FirstDisplayed
     @FindBy(css = "#username-input, input[name='username']")
     private WebElement usernameInput;
 
+    @FirstDisplayed
     @FindBy(css = "#password-input, input[name='password']")
     private WebElement passwordInput;
 
+    @FirstDisplayed
     @FindBy(css = "#login_button button, input[type='submit']")
     private WebElement submit;
 

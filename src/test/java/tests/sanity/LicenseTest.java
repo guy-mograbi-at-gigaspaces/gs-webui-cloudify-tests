@@ -59,19 +59,18 @@ public class LicenseTest {
         Assert.assertTrue("We are now in login page. We should see welcome message", loginPage.isLoginWelcomeMessageVisible());
     }
 
-    @Ignore
+    @Test
     public void licenseTest() {
         logger.info("license test");
         DashboardPage dashboard = loginPage.gotoPage().login(licenseTestConf.username, licenseTestConf.password);
-        dashboard.getAboutButton().click();
+        dashboard.openAbout();
         // TODO comment out and fill in the missing functionality
-//        Assert.assertTrue( String.format( "expecting to see %s in popup with text [%s]", licenseTestConf.aboutText, dashboard.findFirstDisplayedWindowDialog().getText() ), dashboard.isTextInPopups(licenseTestConf.aboutText) );
-//        dashboard.closeDialog("OK").clickLogout().closeDialog( "yes" );
-//        loginPage.load(); // not necessary anymore
-        Assert.assertTrue("We are now in login page. We should see welcome message", loginPage.isLoginWelcomeMessageVisible());
+        Assert.assertTrue( String.format( "expecting to see %s in popup with text [%s]", licenseTestConf.aboutText, dashboard.getAboutText() ), dashboard.getAboutText().toLowerCase().contains(licenseTestConf.aboutText) );
+        ComplexLoginPage logout = dashboard.closeAbout().logout();
+        Assert.assertTrue("We are now in login page. We should see welcome message", logout.isLoginWelcomeMessageVisible());
     }
 
-    @Test
+    @Ignore
     public void failedTest() {
         throw new RuntimeException("I am failing!");
     }

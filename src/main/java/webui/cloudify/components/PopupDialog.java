@@ -68,7 +68,15 @@ public class PopupDialog extends AbstractComponent<PopupDialog> {
         click("Yes");
     }
 
+    public String getText(){
+        return webElement.getText();
+    }
+
     public void clickNo(){
         click("No");
+    }
+
+    public void clickOk() {
+        click("OK");
     }
 }

@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import webui.cloudify.components.PopupDialog;
+import webui.tests.annotations.LazyLoad;
 import webui.tests.components.abstracts.AbstractComponent;
 
 /**
@@ -48,9 +50,27 @@ public class DashboardPage extends AbstractComponent<DashboardPage> {
     @FindBy(css="#gs-logout-button")
     private WebElement logoutButton;
 
+    @LazyLoad
+    @FindBy(css = "div.x-window-plain.x-window-dlg")
+    private PopupDialog dialog;
+
     @Bean
     public DashboardPage dashboardPage(){
         return new DashboardPage();
+    }
+
+    public void openAbout(){
+        waitFor.elements(aboutButton);
+        aboutButton.click();
+    }
+
+    public DashboardPage closeAbout(){
+        dialog.clickOk();
+        return this;
+    }
+
+    public String getAboutText(){
+        return dialog.load().getText();
     }
 
     public WebElement getAboutButton() {
@@ -64,7 +84,7 @@ public class DashboardPage extends AbstractComponent<DashboardPage> {
 
     public ComplexLoginPage logout(){
         logoutButton.click();
-//        closeDialog( "yes" ); // TODO fill in the missing functionality
+        dialog.clickYes();
         return loginPage.load();
     }
 

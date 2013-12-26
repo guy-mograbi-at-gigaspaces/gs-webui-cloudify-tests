@@ -1,7 +1,9 @@
 package webui.cloudify.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +48,18 @@ public class ComplexLoginPage extends AbstractComponent<ComplexLoginPage> {
     }
 
     public boolean isLoginWelcomeMessageVisible(){
-        String bodyText = body.getText().toLowerCase();
-        return bodyText.contains( "welcome" ) && bodyText.contains( "please log in" );
+
+        final WebElement finalBody = body;
+
+
+        return (Boolean) waitFor.predicate( new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver input) {
+                String bodyText = body.getText().toLowerCase();
+                return bodyText.contains( "welcome" ) && bodyText.contains( "please log in" ) ? Boolean.TRUE : null;
+            }
+        });
+
     }
 
     public void setRootUrl( String rootUrl ) {
