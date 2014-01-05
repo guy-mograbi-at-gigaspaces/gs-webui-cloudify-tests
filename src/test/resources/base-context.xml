@@ -31,4 +31,8 @@
     <beans profile="impl">
         <import resource="impl-context.xml"/>
     </beans>
+
+    <beans profile="overrides">
+        <import resource="classpath:overrides/spring.xml"/> <!-- allow overriding -->
+    </beans>
 </beans>
