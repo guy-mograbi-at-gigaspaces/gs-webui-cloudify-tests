@@ -47,6 +47,7 @@ public class LicenseTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void beforeTest(){
+        logger.info("beforeTest");
         setupManager.executeBeforeTest();
     }
        /*
@@ -64,7 +65,7 @@ public class LicenseTest extends AbstractTestNGSpringContextTests {
 
     @org.testng.annotations.Test
     public void test(){
-        System.out.println("Running License Test");
+        logger.info("Running License Test");
     }
 
     public void setSetupManager(SetupActionsManager.TestNg setupManager) {
